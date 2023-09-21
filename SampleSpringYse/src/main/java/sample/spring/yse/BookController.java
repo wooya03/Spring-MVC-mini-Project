@@ -41,17 +41,18 @@ public class BookController {
 	// @RequestParam 어노테이션에 의해 쿼리 스트링 파라미터를 읽을 수 있음
 	// 스프링은 http 메소드를 구분하지 않고 파라미터를 GET, POST 동일한 방법으로 읽을 수 있게 함
 	// Map<key, value>
+	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public ModelAndView detail(@RequestParam Map<String, Object> map) {
-		Map<String, Object> detailMap = this.bookService.detail(map);
-		
-		// ModelAndView : 데이터와 뷰를 동시에 설정이 가능, 반환값으로 ModelAndView 객체를 반환
-		ModelAndView mav = new ModelAndView();
-		// addObject() : 뷰로 보낼 데이터 값
-		mav.addObject("data", detailMap);
-		String bookId = map.get("bookId").toString();
-		// toString() : 객체가 가지고 있는 정보나 값들을 문자열로 만들어 리턴하는 메소드
-		mav.addObject("bookId", bookId);
-		mav.setViewName("/book/detail");
-		return mav;
+	    Map<String, Object> detailMap = this.bookService.detail(map);
+	    
+	 // ModelAndView : 데이터와 뷰를 동시에 설정이 가능, 반환값으로 ModelAndView 객체를 반환
+	    ModelAndView mav = new ModelAndView();
+	 // addObject() : 뷰로 보낼 데이터 값
+	    mav.addObject("data", detailMap);
+	 // toString() : 객체가 가지고 있는 정보나 값들을 문자열로 만들어 리턴
+	    String bookId = map.get("bookId").toString();
+	    mav.addObject("bookId", bookId);
+	    mav.setViewName("/book/detail");
+	    return mav;
 	}
 }
