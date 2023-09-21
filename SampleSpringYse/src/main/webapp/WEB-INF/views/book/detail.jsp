@@ -6,8 +6,8 @@
  </head>
  <body>
   <h1>책 상세</h1>
-  <p>제목 : ${ data.title } </p>
-  <p>카테고리 : ${ data.category }</p>
+  <p>제목 : ${data.title} </p>
+  <p>카테고리 : ${data.category}</p>
   <p>가격 : <fmt:formatNumber type="number" maxFractionDigits="3" value="${data.price}" /></p> 
   <p>입력일 : <fmt:formatDate value="${data.insert_date}" pattern="yyyy.MM.dd HH:mm:ss" /></p>
 

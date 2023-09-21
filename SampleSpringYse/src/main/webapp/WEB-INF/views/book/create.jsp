@@ -4,7 +4,6 @@
   <title>책 생성하기</title>
  </head>
  <body>
- <%-- 실제 화면 --%>
   <h1>책 생성하기</h1>
   <form method="POST">
    <p>제목 : <input type="text" name="title" /></p>

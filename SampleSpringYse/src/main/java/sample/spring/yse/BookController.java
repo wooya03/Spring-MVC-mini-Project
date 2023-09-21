@@ -1,5 +1,6 @@
 package sample.spring.yse;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,7 @@ public class BookController {
 	    }  
 	    return mav;
 	}
+	
 	// 책 상세 URL이 입력되면 실행되는 메소드
 	// @RequestParam 어노테이션에 의해 쿼리 스트링 파라미터를 읽을 수 있음
 	// 스프링은 http 메소드를 구분하지 않고 파라미터를 GET, POST 동일한 방법으로 읽을 수 있게 함
@@ -54,5 +56,73 @@ public class BookController {
 	    mav.addObject("bookId", bookId);
 	    mav.setViewName("/book/detail");
 	    return mav;
+	}
+	
+	// 책 수정 화면
+	@RequestMapping(value = "/update", method=RequestMethod.GET)
+	public ModelAndView update(@RequestParam Map<String, Object> map) {
+		Map<String, Object> datailMap = this.bookService.detail(map);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("data", datailMap);
+		mav.setViewName("/book/update");
+		return mav;
+	}
+	
+	// 책 수정 기능
+	// 책 수정 화면에서 책 수정 기능으로 보내주는 파라미터
+	// 1. GET 파라미터로 전달되는bookId : /update?bookId=1 
+	// 2. form 태그를 통해 전달되는 title
+	// 3. form 태그를 통해 전달되는 category
+	// 4. form 태그를 통해 전달되는 price
+	// http 메소드가 GET인지 POST인지 상관하지 않고 @RequestMapping 어노테이션이 있으면 무조건 파라미터를 넣어줌
+	@RequestMapping(value = "update", method = RequestMethod.POST)  
+	public ModelAndView updatePost(@RequestParam Map<String, Object> map) {  
+	ModelAndView mav = new ModelAndView();  
+
+	boolean isUpdateSuccess = this.bookService.edit(map); 
+	// 정상적으로 데이터가 갱신되었을 경우 확인을 위해 상세 페이지로 이동
+	if (isUpdateSuccess) {  
+	String bookId = map.get("bookId").toString();  
+	mav.setViewName("redirect:/detail?bookId=" + bookId);  
+	}else {  
+	// 갱신이 안 되었을 경우 갱신 화면을 바로 다시 보여줌
+	mav = this.update(map);  
+	}  
+
+	return mav;  
+	}  
+	
+	// 책 삭제 기능 컨트롤러 메소드
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public ModelAndView deletePost(@RequestParam Map<String, Object> map) {
+		ModelAndView mav = new ModelAndView();
+		
+		// 삭제가 성공했는지 확인
+		boolean isDeleteSuccess = this.bookService.remove(map);
+		if (isDeleteSuccess) {
+			// 삭제가 성공했으면 상세 페이지가 없으므로 목록으로 리다이렉트
+			mav.setViewName("redirect:/list");
+		} else {
+			// 삭제가 실패했으면 다시 상세 페이지로 이동
+			String bookId = map.get("bookId").toString();
+			mav.setViewName("redirect:/detail?bookId=" + bookId);
+		}
+		
+		return mav;
+	}
+	
+	// 책 목록 컨트롤러 메소드
+	@RequestMapping(value = "list")
+	public ModelAndView list(@RequestParam Map<String, Object> map) {
+		// 책 목록을 데이터베이스에서 가지고 옴
+		List<Map<String, Object>> list = this.bookService.list(map);
+		
+		ModelAndView mav = new ModelAndView();
+		// 데이터를 뷰에 전달할 수 있게 mav 객체에 넣음
+		mav.addObject("data", list);
+		// /book/list 뷰를 리턴
+		mav.setViewName("/book/lsit");
+		return mav;
 	}
 }
