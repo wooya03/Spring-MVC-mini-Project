@@ -6,4 +6,5 @@ import java.util.Map;
 public interface BookService {
 	// 메소드 시그니쳐 추가
 	String create(Map<String, Object> map);
+	Map<String, Object> detail(Map<String, Object> map);
 }

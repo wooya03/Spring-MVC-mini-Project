@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository;
 
 // 매퍼 XML을 실행시키는 클래스 DAO(Data Access Object)
 
-@Repository
+@Repository // 외부I/O 처리
 public class BookDao {
- @Autowired
+ @Autowired // 필요한 의존 객체의 “타입"에 해당하는 빈을 찾아 주입
  SqlSessionTemplate sqlSessionTemplate;
  // 책 데이터 입력 쿼리를 실행
  public int insert(Map<String, Object> map) {
