@@ -12,3 +12,4 @@ public interface BookService {
 	boolean remove(Map<String, Object> map);  
 	List<Map<String, Object>> list(Map<String, Object> map);  
 }
+
