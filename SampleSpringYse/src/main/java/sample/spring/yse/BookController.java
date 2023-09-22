@@ -121,8 +121,14 @@ public class BookController {
 		ModelAndView mav = new ModelAndView();
 		// 데이터를 뷰에 전달할 수 있게 mav 객체에 넣음
 		mav.addObject("data", list);
+		
+		// 파라미터가 있는 지 검사
+		if(map.containsKey("keyword")) {
+			// 파라미터가 있다면 뷰에 keyword를 전달
+			mav.addObject("keyword", map.get("keyword"));
+		}
 		// /book/list 뷰를 리턴
-		mav.setViewName("/book/lsit");
+		mav.setViewName("/book/list");
 		return mav;
 	}
 }

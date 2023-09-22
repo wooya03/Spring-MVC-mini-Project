@@ -49,7 +49,11 @@ price,
 insert_date  
 from  
 book  
-order by insert_date desc  
+where 1 = 1  
 ]]>  
-</select>
+<if test="keyword != null and keyword != ''">  
+and (title like CONCAT('%',#{keyword},'%') or category like CONCAT('%',#{keyword},'%'))  
+</if>  
+order by insert_date desc  
+</select>  
 </mapper>

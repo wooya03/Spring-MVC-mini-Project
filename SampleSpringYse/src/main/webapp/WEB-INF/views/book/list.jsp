@@ -7,30 +7,34 @@
 </head>  
 <body>  
 <h1>책 목록</h1>  
-<table>  
-<thead>  
-<tr>  
-<td>제목</td>  
-<td>카테고리</td>  
-<td>가격</td>  
-</tr>  
-</thead>  
-<tbody>  
-<c:forEach var="row" items="${data}">  
-<tr>  
-<td>  
-<a href="/detail?bookId=${row.book_id}">  
-${row.title}  
-</a>  
-</td>  
-<td>${row.category}</td>  
-<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${row.price}" /></td>  
-</tr>  
-</c:forEach>  
-</tbody>  
+<p>  
+	<form>  
+		<input type="text" placeholder="검색" name="keyword" value="${keyword}" />  
+		<input type="submit" value="검색" />  
+	</form>  
+</p>  
+<table>    
+	<thead>  
+		<tr>  
+			<td>제목</td>  
+			<td>카테고리</td>  
+			<td>가격</td>  
+		</tr>  
+	</thead>  
+	<tbody>  
+		<c:forEach var="row" items="${data}">  
+		<tr>  
+			<td>  
+				<a href="/detail?bookId=${row.book_id}">${row.title}</a>  
+			</td>  
+			<td>${row.category}</td>  
+			<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${row.price}" /></td>  
+		</tr>  
+		</c:forEach>  
+	</tbody>  
 </table>  
 <p>  
-<a href="/create">생성</a>  
+	<a href="/create">생성</a>  
 </p>  
 </body>  
 </html>  
