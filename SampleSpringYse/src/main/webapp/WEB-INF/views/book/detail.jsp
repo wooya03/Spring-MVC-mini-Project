@@ -10,7 +10,6 @@
   <p>카테고리 : ${data.category}</p>
   <p>가격 : <fmt:formatNumber type="number" maxFractionDigits="3" value="${data.price}" /></p> 
   <p>입력일 : <fmt:formatDate value="${data.insert_date}" pattern="yyyy.MM.dd HH:mm:ss" /></p>
-
   <p>
    <a href="/update?bookId=${bookId}">수정</a>
   </p>
