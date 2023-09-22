@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 // 서비스 클래스 : 컨트롤러와 DAO를 연결
 
-
 @Service // 로직 처리
 public class BookServiceImpl implements BookService {
  @Autowired
