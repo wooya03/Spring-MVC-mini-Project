@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 // 매퍼 XML을 실행시키는 클래스 DAO(Data Access Object)
-
 @Repository // 외부I/O 처리
 public class BookDao {
  @Autowired // 필요한 의존 객체의 “타입"에 해당하는 빈을 찾아 주입
