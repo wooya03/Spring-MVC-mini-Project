@@ -37,8 +37,6 @@ public boolean remove(Map<String, Object> map) {
 	return affectRowCount == 1;
 }
 
-
-
  @Override
 public List<Map<String, Object>> list(Map<String, Object> map) {
 	return this.bookDao.selectList(map);
